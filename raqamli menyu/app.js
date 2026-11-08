@@ -378,8 +378,9 @@
     btn.disabled = true;
     btn.textContent = "Yuborilmoqda...";
 
+    const apiBase = window.location.origin.includes(':3000') ? '' : 'http://localhost:3000';
     try {
-      const res = await fetch("/api/dinein", {
+      const res = await fetch(`${apiBase}/api/dinein`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ table, items, total }),

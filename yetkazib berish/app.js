@@ -3,7 +3,8 @@
     const RESTAURANT = 'Dunyo restaurant';
 
     // Server manzili
-    const API_URL = window.location.origin;
+    const API_BASE = window.location.origin.includes(':3000') ? '' : 'http://localhost:3000';
+    const API_URL = API_BASE;
 
     const DELIVERY_FEE = 15000;   // yetkazib berish narxi
     const FREE_FROM = 150000;     // shu summadan yuqori buyurtmada yetkazish bepul
@@ -331,7 +332,7 @@
         btn.textContent = 'Yuborilmoqda...';
 
         try {
-            const res = await fetch('/api/delivery', {
+            const res = await fetch(`${API_BASE}/api/delivery`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
@@ -384,7 +385,7 @@
         if (orderPollTimer) clearInterval(orderPollTimer);
         orderPollTimer = setInterval(async () => {
             try {
-                const res = await fetch(`/api/orders/${orderId}`);
+                const res = await fetch(`${API_BASE}/api/orders/${orderId}`);
                 const data = await res.json();
                 if (!data.success || !data.order) return;
 

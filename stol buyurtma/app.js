@@ -79,11 +79,12 @@
     }
 
     /* ====== BRONLAR (Serverdan real vaqt rejimida yuklanadi) ====== */
+    const API_BASE = window.location.origin.includes(':3000') ? '' : 'http://localhost:3000';
     let serverBookings = [];
 
     async function fetchBookings() {
         try {
-            const res = await fetch(`/api/reservations?date=${state.date}`);
+            const res = await fetch(`${API_BASE}/api/reservations?date=${state.date}`);
             const data = await res.json();
             if (data.success && Array.isArray(data.bookings)) {
                 serverBookings = data.bookings;
@@ -283,7 +284,7 @@
         };
 
         try {
-            const res = await fetch('/api/reservations', {
+            const res = await fetch(`${API_BASE}/api/reservations`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
@@ -321,7 +322,7 @@
         if (pollTimer) clearInterval(pollTimer);
         pollTimer = setInterval(async () => {
             try {
-                const res = await fetch(`/api/reservations/${bookingId}`);
+                const res = await fetch(`${API_BASE}/api/reservations/${bookingId}`);
                 const data = await res.json();
                 if (!data.success || !data.booking) return;
 

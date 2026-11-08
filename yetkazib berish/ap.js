@@ -3,7 +3,8 @@
     const RESTAURANT = 'Dunyo restaurant';
 
     // Server manzili
-    const API_URL = window.location.origin;
+    const API_BASE = window.location.origin.includes(':3000') ? '' : 'http://localhost:3000';
+    const API_URL = API_BASE;
 
     const DELIVERY_FEE = 15000;   // yetkazib berish narxi
     const FREE_FROM = 150000;     // shu summadan yuqori buyurtmada yetkazish bepul
@@ -331,7 +332,7 @@
         btn.textContent = 'Yuborilmoqda...';
 
         try {
-            const res = await fetch('/api/delivery', {
+            const res = await fetch(`${API_BASE}/api/delivery`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
@@ -384,7 +385,7 @@
         if (orderPollTimer) clearInterval(orderPollTimer);
         orderPollTimer = setInterval(async () => {
             try {
-                const res = await fetch(`/api/orders/${orderId}`);
+                const res = await fetch(`${API_BASE}/api/orders/${orderId}`);
                 const data = await res.json();
                 if (!data.success || !data.order) return;
 
@@ -425,56 +426,56 @@
                         note.innerHTML = '<div class="status-alert-box status-alert-danger">😔 <b>Afsus!</b> Buyurtmangiz qabul qilinmadi. Iltimos qaytadan urinib ko\'ring yoki qo\'ng\'iroq qiling: +998 71 200 00 00</div>';
                     }
                 }
-            } catch (e) {}
+            } catch (e) { }
         }, 2000);
     }
+});
+
+$('newBtn').addEventListener('click', () => {
+    if (orderPollTimer) { clearInterval(orderPollTimer); orderPollTimer = null; }
+    if (window.celebrationManager) window.celebrationManager.stopCelebration();
+    const title = document.querySelector('#dDone .done_title');
+    if (title) { title.textContent = 'Buyurtma qabul qilindi'; title.style.color = ''; }
+    $('dDone').hidden = true;
+    $('dForm').hidden = false;
+    $('comment').value = '';
+    $('formError').hidden = true;
+});
+
+/* ====== SARLAVHA ANIMATSIYASI ====== */
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (!reduceMotion) {
+    const title = document.querySelector('.d_title');
+    const text = title.textContent.trim();
+    title.setAttribute('aria-label', text);
+    title.textContent = '';
+    [...text].forEach((ch, i) => {
+        const s = document.createElement('span');
+        s.className = 'ch';
+        s.setAttribute('aria-hidden', 'true');
+        s.style.setProperty('--i', i);
+        s.textContent = ch === ' ' ? '\u00A0' : ch;
+        title.appendChild(s);
     });
 
-    $('newBtn').addEventListener('click', () => {
-        if (orderPollTimer) { clearInterval(orderPollTimer); orderPollTimer = null; }
-        if (window.celebrationManager) window.celebrationManager.stopCelebration();
-        const title = document.querySelector('#dDone .done_title');
-        if (title) { title.textContent = 'Buyurtma qabul qilindi'; title.style.color = ''; }
-        $('dDone').hidden = true;
-        $('dForm').hidden = false;
-        $('comment').value = '';
-        $('formError').hidden = true;
+    const para = document.querySelector('.d_text');
+    const words = para.textContent.trim().split(/\s+/);
+    para.textContent = '';
+    words.forEach((w, i) => {
+        const wrap = document.createElement('span');
+        wrap.className = 'w';
+        const inner = document.createElement('span');
+        inner.textContent = w;
+        inner.style.setProperty('--d', 600 + Math.min(i * 35, 1000) + 'ms');
+        wrap.appendChild(inner);
+        para.appendChild(wrap);
+        if (i < words.length - 1) para.appendChild(document.createTextNode(' '));
     });
+    requestAnimationFrame(() => para.classList.add('is-visible'));
+}
 
-    /* ====== SARLAVHA ANIMATSIYASI ====== */
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!reduceMotion) {
-        const title = document.querySelector('.d_title');
-        const text = title.textContent.trim();
-        title.setAttribute('aria-label', text);
-        title.textContent = '';
-        [...text].forEach((ch, i) => {
-            const s = document.createElement('span');
-            s.className = 'ch';
-            s.setAttribute('aria-hidden', 'true');
-            s.style.setProperty('--i', i);
-            s.textContent = ch === ' ' ? '\u00A0' : ch;
-            title.appendChild(s);
-        });
-
-        const para = document.querySelector('.d_text');
-        const words = para.textContent.trim().split(/\s+/);
-        para.textContent = '';
-        words.forEach((w, i) => {
-            const wrap = document.createElement('span');
-            wrap.className = 'w';
-            const inner = document.createElement('span');
-            inner.textContent = w;
-            inner.style.setProperty('--d', 600 + Math.min(i * 35, 1000) + 'ms');
-            wrap.appendChild(inner);
-            para.appendChild(wrap);
-            if (i < words.length - 1) para.appendChild(document.createTextNode(' '));
-        });
-        requestAnimationFrame(() => para.classList.add('is-visible'));
-    }
-
-    /* ====== BOSHLASH ====== */
-    renderCats();
-    renderDishes();
-    updatePanel();
-})();
+/* ====== BOSHLASH ====== */
+renderCats();
+renderDishes();
+updatePanel();
+}) ();
