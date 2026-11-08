@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raqamli menyu | Dunyo restaurant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../the main/main.css">
+    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="/celebration.css">
+</head>
+
+<body>
+    <div class="contianer">
+        <main class="main">
+            <a href="../the main/index.html"><img src="../images/dunyo-logo (1).svg"
+                    alt="Dunyo restaurant logotipi"></a>
+            <ul class="main_link">
+                <li class="main_list">
+                    <a href="../raqamli menyu/index.html" class="main_a is-active">Raqamli menyu</a>
+                </li>
+                <li class="main_list">
+                    <a href="../stol buyurtma/index.html" class="main_a">Stol bron qilish</a>
+                </li>
+                <li class="main_list">
+                    <a href="../yetkazib berish/index.html" class="main_a">Buyurtma va yetkazib berish</a>
+                </li>
+                <li class="main_list">
+                    <a href="/admin" class="main_a">Boshqaruv paneli</a>
+                </li>
+                <li class="main_list">
+                    <a href="#" class="main_a">AI yordamchi</a>
+                </li>
+            </ul>
+            <button>+998 000 0000</button>
+        </main>
+
+        <header class="menu_head">
+            <h1 class="menu_title">raqamli menyu</h1>
+            <p class="menu_text">Taomni tanlang, savatga qo’shing va buyurtmani Telegram orqali yuboring.
+                Narxlar so’mda ko’rsatilgan.</p>
+        </header>
+
+        <section class="menu_tools" aria-label="Qidiruv va toifalar">
+            <input class="menu_search" id="search" type="search" placeholder="Taom nomini qidiring" autocomplete="off"
+                aria-label="Taom qidirish">
+            <div class="cats" id="cats" role="tablist" aria-label="Taom toifalari"></div>
+        </section>
+
+        <section class="dishes" id="dishes" aria-live="polite"></section>
+        <p class="empty" id="empty" hidden>Hech narsa topilmadi. Boshqa nom bilan qidiring yoki toifani o’zgartiring.
+        </p>
+    </div>
+
+    <!-- Savat tugmasi -->
+    <button class="cart_fab" id="cartFab" hidden aria-label="Savatni ochish">
+        <span class="cart_fab_count" id="cartCount">0</span>
+        <span>Savat</span>
+        <strong id="cartTotalFab">0 so’m</strong>
+    </button>
+
+    <!-- Savat paneli -->
+    <div class="cart_overlay" id="cartOverlay" hidden></div>
+    <aside class="cart" id="cart" aria-label="Savat" aria-hidden="true">
+        <div class="cart_head">
+            <h2 class="cart_title">Sizning buyurtmangiz</h2>
+            <button class="cart_close" id="closeCart" aria-label="Savatni yopish">✕</button>
+        </div>
+        <ul class="cart_items" id="cartItems"></ul>
+        <div class="cart_foot">
+            <label class="cart_label" for="table">Stol raqami (ixtiyoriy)</label>
+            <input class="cart_input" id="table" type="text" inputmode="numeric" maxlength="4" placeholder="Masalan: 7">
+            <div class="cart_sum">
+                <span>Jami</span>
+                <strong id="cartTotal">0 so’m</strong>
+            </div>
+            <button class="cart_send" id="sendOrder">Telegram orqali yuborish</button>
+        </div>
+    </aside>
+
+    <script src="/celebration.js"></script>
+    <script src="./app.js"></script>
+    <script src="/ai-widget.js"></script>
+</body>
+
+</html>

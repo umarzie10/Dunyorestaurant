@@ -1,0 +1,23 @@
+{
+  "name": "dunyo-restaurant",
+  "version": "1.0.0",
+  "description": "Dunyo Restaurant - Web Site, Backend API va Telegram Bot",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js"
+  },
+  "keywords": [
+    "restaurant",
+    "telegram-bot",
+    "booking",
+    "delivery"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stol bron qilish | Dunyo restaurant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../the main/main.css">
+    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="/celebration.css">
+</head>
+
+<body>
+    <div class="contianer">
+        <main class="main">
+            <a href="../the main/index.html"><img src="../images/dunyo-logo (1).svg"
+                    alt="Dunyo restaurant logotipi"></a>
+            <ul class="main_link">
+                <li class="main_list">
+                    <a href="../raqamli menyu/index.html" class="main_a">Raqamli menyu</a>
+                </li>
+                <li class="main_list">
+                    <a href="./index.html" class="main_a is-active">Stol bron qilish</a>
+                </li>
+                <li class="main_list">
+                    <a href="../yetkazib berish/index.html" class="main_a">Buyurtma va yetkazib berish</a>
+                </li>
+                <li class="main_list">
+                    <a href="/admin" class="main_a">Boshqaruv paneli</a>
+                </li>
+                <li class="main_list">
+                    <a href="#" class="main_a">AI yordamchi</a>
+                </li>
+            </ul>
+            <button>+998 000 0000</button>
+        </main>
+
+        <header class="bron_head">
+            <h1 class="bron_title">stol bron qilish</h1>
+            <p class="bron_text">Sana, vaqt va mehmonlar sonini tanlang, keyin korpus rejasidan o’zingizga qulay
+                stolni belgilang.</p>
+        </header>
+
+        <!-- 1-qadam: sana, vaqt, mehmonlar -->
+        <section class="filters" aria-label="Bron sozlamalari">
+            <div class="field">
+                <label class="field_label" for="date">Sana</label>
+                <input class="f_input" id="date" type="date">
+            </div>
+            <div class="field">
+                <span class="field_label" id="guestsLabel">Mehmonlar soni</span>
+                <div class="gstep" role="group" aria-labelledby="guestsLabel">
+                    <button id="gMinus" aria-label="Kamaytirish">−</button>
+                    <span id="gVal">2</span>
+                    <button id="gPlus" aria-label="Ko’paytirish">+</button>
+                </div>
+            </div>
+            <div class="field field_wide">
+                <span class="field_label" id="timeLabel">Vaqt</span>
+                <div class="slots" id="slots" role="group" aria-labelledby="timeLabel"></div>
+            </div>
+        </section>
+
+        <!-- 2-qadam: korpus -->
+        <section class="ktabs" id="ktabs" role="tablist" aria-label="Korpuslar"></section>
+        <p class="knote" id="knote"></p>
+
+        <div class="bron_layout">
+            <!-- Reja -->
+            <section class="plan_box" aria-label="Zal rejasi">
+                <ul class="legend">
+                    <li><i class="sw sw_free"></i>Bo’sh</li>
+                    <li><i class="sw sw_booked"></i>Band</li>
+                    <li><i class="sw sw_small"></i>O’rin yetmaydi</li>
+                    <li><i class="sw sw_sel"></i>Tanlangan</li>
+                </ul>
+                <div class="plan_wrap">
+                    <div class="plan" id="plan"></div>
+                </div>
+                <p class="plan_hint">Reja taxminiy. Telefonda yon tomonga surib ko’ring.</p>
+            </section>
+
+            <!-- Bron ma'lumotlari -->
+            <aside class="summary" id="summary" aria-live="polite">
+                <div id="sumForm">
+                    <h2 class="sum_title">Sizning bronigiz</h2>
+                    <dl class="sum_list" id="sumList"></dl>
+
+                    <form id="form" novalidate>
+                        <label class="field_label" for="name">Ismingiz</label>
+                        <input class="f_input" id="name" type="text" autocomplete="name" placeholder="Masalan: Aziz">
+
+                        <label class="field_label" for="phone">Telefon raqami</label>
+                        <input class="f_input" id="phone" type="tel" autocomplete="tel" placeholder="+998 90 123 45 67">
+
+                        <label class="field_label" for="comment">Izoh (ixtiyoriy)</label>
+                        <textarea class="f_input" id="comment" rows="2"
+                            placeholder="Masalan: tug’ilgan kun, bolalar o’rindig’i kerak"></textarea>
+
+                        <p class="form_error" id="formError" role="alert" hidden></p>
+                        <button class="book_btn" id="bookBtn" type="submit" disabled>Stolni bron qilish</button>
+                    </form>
+                </div>
+
+                <div id="sumDone" hidden>
+                    <h2 class="sum_title done_title">Bron qabul qilindi</h2>
+                    <p class="done_id" id="doneId"></p>
+                    <dl class="sum_list" id="doneList"></dl>
+                    <p class="done_note">Restoran xodimi sizga telefon orqali tasdiqlash uchun qo’ng’iroq qiladi.</p>
+                    <button class="book_btn" id="tgBtn">Telegram orqali yuborish</button>
+                    <button class="ghost_btn" id="newBtn">Yangi bron</button>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <script src="/celebration.js"></script>
+    <script src="./app.js"></script>
+    <script src="/ai-widget.js"></script>
+</body>
+
+</html>

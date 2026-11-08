@@ -1,0 +1,52 @@
+[
+  {
+    "id": "ORD-260448",
+    "code": 4208,
+    "mode": "delivery",
+    "pay": "naqd",
+    "items": [
+      {
+        "name": "Qozon kabob",
+        "qty": 1
+      }
+    ],
+    "sub": 72000,
+    "fee": 15000,
+    "total": 87000,
+    "name": "Umar",
+    "phone": "998977066245",
+    "address": "Sergeli",
+    "loc": "",
+    "comment": "",
+    "status": "new",
+    "createdAt": "2026-11-07T18:31:00.448Z"
+  },
+  {
+    "id": "ORD-269730",
+    "code": 9588,
+    "mode": "delivery",
+    "pay": "naqd",
+    "items": [
+      {
+        "price": 45000,
+        "name": "To'y oshi",
+        "qty": 2
+      },
+      {
+        "price": 14000,
+        "name": "Achichuk",
+        "qty": 2
+      }
+    ],
+    "sub": 118000,
+    "fee": 15000,
+    "total": 133000,
+    "name": "Azizbek Rahimov",
+    "phone": "+998 90 987 65 43",
+    "address": "Yunusobod 4-mavze, 12-uy, 45-xonadon",
+    "loc": "41.3111,69.2797",
+    "comment": "Iltimos issiq holda yetkazing",
+    "status": "new",
+    "createdAt": "2026-11-07T18:14:29.730Z"
+  }
+]

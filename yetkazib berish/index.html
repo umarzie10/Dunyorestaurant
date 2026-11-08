@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yetkazib berish | Dunyo restaurant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./main.css">
+    <link rel="stylesheet" href="../raqamli menyu/main.css">
+    <link rel="stylesheet" href="../stol buyurtma/main.css">
+    <link rel="stylesheet" href="../the main/main.css">
+    <link rel="stylesheet" href="/celebration.css">
+</head>
+
+<body>
+    <div class="contianer">
+        <main class="main">
+            <a href="../the main/index.html"><img src="../images/dunyo-logo (1).svg"
+                    alt="Dunyo restaurant logotipi"></a>
+            <ul class="main_link">
+                <li class="main_list">
+                    <a href="../raqamli menyu/index.html" class="main_a">Raqamli menyu</a>
+                </li>
+                <li class="main_list">
+                    <a href="../stol buyurtma/index.html" class="main_a">Stol bron qilish</a>
+                </li>
+                <li class="main_list">
+                    <a href="../yetkazib berish/index.html" class="main_a is-active">Buyurtma va yetkazib berish</a>
+                </li>
+                <li class="main_list">
+                    <a href="/admin" class="main_a">Boshqaruv paneli</a>
+                </li>
+                <li class="main_list">
+                    <a href="#" class="main_a">AI yordamchi</a>
+                </li>
+            </ul>
+            <button>+998 000 0000</button>
+        </main>
+
+        <header class="d_head">
+            <h1 class="d_title">yetkazib berish</h1>
+            <p class="d_text">Taomni tanlang, manzilingizni yozing, qolganini bizga qoldiring. Issiq holda
+                eshigingizgacha
+                yetkazamiz yoki o’zingiz kelib olib ketasiz.</p>
+            <ul class="d_chips" id="chips"></ul>
+        </header>
+
+        <div class="dlayout">
+            <!-- Yetkazib berish menyusi -->
+            <section class="dmenu" aria-label="Yetkazib berish menyusi">
+                <input class="menu_search" id="search" type="search" placeholder="Taom nomini qidiring"
+                    autocomplete="off" aria-label="Taom qidirish">
+                <div class="cats" id="cats" role="tablist" aria-label="Taom toifalari"></div>
+                <div class="dishes" id="dishes" aria-live="polite"></div>
+                <p class="empty" id="empty" hidden>Hech narsa topilmadi. Boshqa nom bilan qidiring yoki toifani
+                    o’zgartiring.</p>
+            </section>
+
+            <!-- Buyurtma paneli -->
+            <aside class="summary d_panel" id="order" aria-label="Buyurtma">
+                <div id="dForm">
+                    <h2 class="sum_title">Sizning buyurtmangiz</h2>
+                    <ul class="d_items" id="dItems"></ul>
+                    <dl class="d_totals" id="dTotals"></dl>
+                    <p class="d_hint" id="dHint"></p>
+
+                    <form id="form" novalidate>
+                        <div class="seg" role="group" aria-label="Olish usuli">
+                            <button type="button" class="seg_btn is-active" data-mode="delivery">Yetkazib
+                                berish</button>
+                            <button type="button" class="seg_btn" data-mode="pickup">Olib ketaman</button>
+                        </div>
+
+                        <label class="field_label" for="name">Ismingiz</label>
+                        <input class="f_input" id="name" type="text" autocomplete="name" placeholder="Masalan: Aziz">
+
+                        <label class="field_label" for="phone">Telefon raqami</label>
+                        <input class="f_input" id="phone" type="tel" autocomplete="tel" placeholder="+998 90 123 45 67">
+
+                        <div id="addrBox">
+                            <label class="field_label" for="address">Manzil</label>
+                            <textarea class="f_input" id="address" rows="2" autocomplete="street-address"
+                                placeholder="Ko’cha, uy, xonadon, mo’ljal"></textarea>
+                            <button type="button" class="loc_btn" id="locBtn">Joylashuvimni aniqlash</button>
+                        </div>
+
+                        <span class="field_label" id="payLabel">To’lov usuli</span>
+                        <div class="seg" role="group" aria-labelledby="payLabel">
+                            <button type="button" class="seg_btn is-active" data-pay="naqd">Naqd pul</button>
+                            <button type="button" class="seg_btn" data-pay="karta">Karta orqali</button>
+                        </div>
+
+                        <label class="field_label" for="comment">Izoh (ixtiyoriy)</label>
+                        <textarea class="f_input" id="comment" rows="2"
+                            placeholder="Masalan: achchiq qalampirsiz, qo’ng’iroq ishlamaydi"></textarea>
+
+                        <p class="form_error" id="formError" role="alert" hidden></p>
+                        <button class="book_btn" id="sendBtn" type="submit" disabled>Buyurtmani yuborish</button>
+                    </form>
+                </div>
+
+                <div id="dDone" hidden>
+                    <h2 class="sum_title done_title">Buyurtma qabul qilindi</h2>
+                    <p class="done_id" id="doneId"></p>
+                    <dl class="sum_list" id="doneList"></dl>
+                    <p class="done_note" id="doneNote"></p>
+                    <button class="ghost_btn" id="newBtn">Yangi buyurtma</button>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Telefonda buyurtma paneliga o'tish tugmasi -->
+    <a class="cart_fab d_fab" id="fab" href="#order" hidden>
+        <span class="cart_fab_count" id="fabCount">0</span>
+        <span>Buyurtmaga o’tish</span>
+        <strong id="fabTotal">0 so’m</strong>
+    </a>
+
+    <script src="/celebration.js"></script>
+    <script src="./app.js"></script>
+    <script src="/ai-widget.js"></script>
+</body>
+
+</html>

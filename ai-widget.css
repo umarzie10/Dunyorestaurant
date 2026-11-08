@@ -1,0 +1,226 @@
+/* Dunyo Restaurant AI Assistant Widget Styles */
+.ai-fab {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    box-shadow: 0 10px 25px rgba(245, 158, 11, 0.4);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.ai-fab:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 30px rgba(245, 158, 11, 0.5);
+}
+
+.ai-fab-icon {
+    font-size: 18px;
+    animation: ai-pulse 2s infinite ease-in-out;
+}
+
+@keyframes ai-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}
+
+/* Chat Modal / Window */
+.ai-modal {
+    position: fixed;
+    bottom: 84px;
+    right: 24px;
+    width: 380px;
+    max-width: calc(100vw - 32px);
+    height: 520px;
+    max-height: calc(100vh - 120px);
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: translateY(20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ai-modal.is-open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.ai-head {
+    background: #0f172a;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #334155;
+}
+
+.ai-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ai-head-icon {
+    font-size: 22px;
+}
+
+.ai-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #f8fafc;
+    margin: 0;
+}
+
+.ai-subtitle {
+    font-size: 11px;
+    color: #10b981;
+    margin: 0;
+}
+
+.ai-close {
+    background: none;
+    border: none;
+    color: #94a3b8;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.ai-close:hover {
+    color: #fff;
+}
+
+.ai-body {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #1e293b;
+}
+
+.ai-msg {
+    max-width: 85%;
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-size: 13.5px;
+    line-height: 1.45;
+    word-break: break-word;
+}
+
+.ai-msg-bot {
+    align-self: flex-start;
+    background: #0f172a;
+    color: #e2e8f0;
+    border: 1px solid #334155;
+    border-bottom-left-radius: 4px;
+}
+
+.ai-msg-user {
+    align-self: flex-end;
+    background: #f59e0b;
+    color: #0f172a;
+    font-weight: 500;
+    border-bottom-right-radius: 4px;
+}
+
+.ai-btn-action {
+    display: inline-block;
+    margin-top: 8px;
+    background: #f59e0b;
+    color: #0f172a;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 12px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: opacity 0.2s;
+}
+
+.ai-btn-action:hover {
+    opacity: 0.9;
+}
+
+.ai-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.ai-chip {
+    background: rgba(245, 158, 11, 0.12);
+    color: #fbbf24;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 11.5px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s;
+}
+
+.ai-chip:hover {
+    background: rgba(245, 158, 11, 0.25);
+}
+
+.ai-foot {
+    padding: 12px;
+    background: #0f172a;
+    border-top: 1px solid #334155;
+    display: flex;
+    gap: 8px;
+}
+
+.ai-input {
+    flex: 1;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 10px 14px;
+    color: #fff;
+    font-size: 13px;
+    font-family: inherit;
+    outline: none;
+}
+
+.ai-input:focus {
+    border-color: #f59e0b;
+}
+
+.ai-send {
+    background: #f59e0b;
+    border: none;
+    border-radius: 10px;
+    padding: 0 16px;
+    color: #0f172a;
+    font-weight: 700;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.ai-send:hover {
+    background: #d97706;
+}
+

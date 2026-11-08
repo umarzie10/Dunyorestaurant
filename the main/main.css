@@ -1,0 +1,435 @@
+/* ===== Ranglar va o'zgaruvchilar ===== */
+:root {
+    --bg: #09090a;
+    --surface: rgba(255, 255, 255, 0.045);
+    --line: rgba(255, 255, 255, 0.14);
+    --text: #f4f2ef;
+    --muted: #b9b4ad;
+    --orange: #ff7a00;
+    --amber: #ffb54d;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    color: var(--text);
+    line-height: 1.65;
+    overflow-x: hidden;
+    background:
+        radial-gradient(60rem 40rem at 90% -10%, rgba(255, 122, 0, 0.18), transparent 60%),
+        radial-gradient(50rem 40rem at -10% 55%, rgba(255, 122, 0, 0.10), transparent 60%),
+        var(--bg);
+    background-attachment: fixed;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+:focus-visible {
+    outline: 2px solid var(--orange);
+    outline-offset: 3px;
+}
+
+.contianer {
+    width: min(1180px, 100% - 40px);
+    margin-inline: auto;
+    padding-bottom: 120px;
+}
+
+/* ===== Navbar ===== */
+.main {
+    position: sticky;
+    top: 16px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-top: 16px;
+    padding: 10px 14px 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    background: rgba(14, 14, 15, 0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+
+.main>a img {
+    height: 44px;
+    width: auto;
+    border-radius: 10px;
+}
+
+.main_link {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+}
+
+.main_a {
+    display: block;
+    padding: 8px 14px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-size: 0.92rem;
+    color: var(--muted);
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.main_a:hover {
+    color: var(--text);
+    border-color: rgba(255, 122, 0, 0.6);
+}
+
+.main_a.is-active {
+    color: var(--orange);
+    border-color: var(--orange);
+}
+
+.main button {
+    padding: 11px 22px;
+    border: 0;
+    border-radius: 18px 18px 18px 4px;
+    font: inherit;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #1a0d00;
+    cursor: pointer;
+    background: linear-gradient(135deg, var(--amber), var(--orange));
+    box-shadow: 0 8px 28px rgba(255, 122, 0, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.main button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 34px rgba(255, 122, 0, 0.45);
+}
+
+/* ===== Hero ===== */
+.hero {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    grid-template-rows: auto auto;
+    align-content: center;
+    column-gap: 56px;
+    padding-top: 90px;
+}
+
+.hero_mak {
+    grid-column: 1;
+    align-self: end;
+    font-size: clamp(3.2rem, 9vw, 7.2rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    text-transform: capitalize;
+    margin-bottom: 28px;
+}
+
+.hero_mak::after {
+    content: '';
+    display: block;
+    width: min(100%, 220px);
+    height: 4px;
+    margin-top: 16px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--orange), transparent);
+    transform-origin: left;
+    animation: sweep 1s 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.hero_list {
+    grid-column: 1;
+    align-self: start;
+}
+
+.hero_h1 {
+    font-size: clamp(1.3rem, 2.6vw, 2rem);
+    font-weight: 700;
+    line-height: 1.25;
+    text-transform: capitalize;
+    margin-bottom: 14px;
+}
+
+.hero_text {
+    max-width: 52ch;
+    color: var(--muted);
+}
+
+.hero>img {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: center;
+    justify-self: end;
+    width: 100%;
+    max-width: 440px;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 40px 160px 40px 160px;
+    border: 1px solid var(--line);
+    box-shadow: 0 0 90px rgba(255, 122, 0, 0.25), 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+
+/* ===== Taom kartalari (osh, go'sht) ===== */
+.the,
+.inner {
+    display: grid;
+    align-items: center;
+    gap: 56px;
+    margin-top: 110px;
+    padding: 40px;
+    border: 1px solid var(--line);
+    border-radius: 48px;
+    background: var(--surface);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.the {
+    grid-template-columns: 0.9fr 1.1fr;
+}
+
+.inner {
+    grid-template-columns: 1.1fr 0.9fr;
+}
+
+.the>img,
+.inner>img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow:
+        0 0 0 8px rgba(255, 122, 0, 0.14),
+        0 0 70px rgba(255, 122, 0, 0.22),
+        0 30px 80px rgba(0, 0, 0, 0.6);
+}
+
+.the_h1,
+.inner_h1 {
+    position: relative;
+    display: block;
+    width: fit-content;
+    margin-bottom: 26px;
+    padding-bottom: 14px;
+    font-size: clamp(1.8rem, 3.6vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    text-transform: capitalize;
+}
+
+.the_h1::after,
+.inner_h1::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 120px;
+    height: 3px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--orange), var(--amber));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1s 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.the_h1.is-visible::after,
+.inner_h1.is-visible::after {
+    transform: scaleX(1);
+}
+
+.the_text,
+.inner_text {
+    max-width: 56ch;
+    color: var(--muted);
+}
+
+/* ===== Matn animatsiyalari ===== */
+
+/* 1) "taomlarimiz": harflar chiqib keladi, keyin to'lqin bo'lib turadi */
+.hero_mak .ch {
+    display: inline-block;
+    color: var(--orange);
+    animation:
+        rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both,
+        wave 3.2s ease-in-out infinite;
+    animation-delay:
+        calc(var(--i) * 70ms),
+        calc(1.2s + var(--i) * 140ms);
+}
+
+@keyframes rise {
+    from {
+        opacity: 0;
+        transform: translateY(60%);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes wave {
+
+    0%,
+    100% {
+        transform: translateY(0);
+        color: var(--orange);
+        text-shadow: 0 0 0 rgba(255, 122, 0, 0);
+    }
+
+    50% {
+        transform: translateY(-7%);
+        color: var(--amber);
+        text-shadow: 0 0 28px rgba(255, 150, 40, 0.55);
+    }
+}
+
+@keyframes sweep {
+    from {
+        transform: scaleX(0);
+    }
+
+    to {
+        transform: scaleX(1);
+    }
+}
+
+/* 2) Sarlavha yozilib chiqadi (typewriter) */
+.is-typing::after {
+    content: '';
+    display: inline-block;
+    width: 3px;
+    height: 1em;
+    margin-left: 4px;
+    vertical-align: -0.12em;
+    background: var(--orange);
+    animation: blink 0.9s steps(1) infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* 3) Matn so'zma-so'z ochiladi (scroll qilganda) */
+.w {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    padding-bottom: 0.18em;
+    margin-bottom: -0.18em;
+}
+
+.w>span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(110%);
+    transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.7s;
+    transition-delay: var(--d, 0ms);
+}
+
+.is-visible .w>span {
+    opacity: 1;
+    transform: none;
+}
+
+/* ===== Mobil ===== */
+@media (max-width: 980px) {
+    .main {
+        flex-wrap: wrap;
+        border-radius: 18px;
+    }
+
+    .main_link {
+        order: 3;
+        width: 100%;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 4px;
+    }
+
+    .main_a {
+        white-space: nowrap;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+        padding-top: 60px;
+    }
+
+    .hero>img {
+        grid-column: 1;
+        grid-row: auto;
+        justify-self: center;
+        margin-top: 40px;
+        max-width: 380px;
+    }
+
+    .the,
+    .inner {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        margin-top: 70px;
+        padding: 24px;
+        border-radius: 32px;
+    }
+
+    .the>img,
+    .inner>img {
+        max-width: 320px;
+        margin-inline: auto;
+    }
+
+    .inner>img {
+        order: -1;
+    }
+}
+
+/* Harakatni kamaytirish sozlamasi yoqilgan bo'lsa */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    .hero_mak .ch,
+    .w>span {
+        opacity: 1;
+        transform: none;
+    }
+
+    .the_h1::after,
+    .inner_h1::after {
+        transform: scaleX(1);
+    }
+}
