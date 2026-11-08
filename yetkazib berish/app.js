@@ -429,9 +429,8 @@
             } catch (e) { }
         }, 2000);
     }
-});
 
-$('newBtn').addEventListener('click', () => {
+    $('newBtn').addEventListener('click', () => {
     if (orderPollTimer) { clearInterval(orderPollTimer); orderPollTimer = null; }
     if (window.celebrationManager) window.celebrationManager.stopCelebration();
     const title = document.querySelector('#dDone .done_title');
