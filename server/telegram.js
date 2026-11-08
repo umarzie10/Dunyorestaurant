@@ -17,6 +17,35 @@ class TelegramService {
       .filter((s) => s && !s.includes('YOUR_'));
   }
 
+  getSiteUrl() {
+    if (process.env.SITE_URL && process.env.SITE_URL !== 'YOUR_SITE_URL_HERE' && !process.env.SITE_URL.includes('YOUR_')) {
+      return process.env.SITE_URL.replace(/\/$/, '');
+    }
+
+    // Telefonlar ochishi uchun lokal tarmoq (Wi-Fi/LAN) IP manzilini aniqlash
+    try {
+      const os = require('os');
+      const nets = os.networkInterfaces();
+      for (const name of Object.keys(nets)) {
+        for (const net of nets[name]) {
+          if (net.family === 'IPv4' && !net.internal) {
+            return `http://${net.address}:${process.env.PORT || 3000}`;
+          }
+        }
+      }
+    } catch (e) {}
+
+    return `http://localhost:${process.env.PORT || 3000}`;
+  }
+
+  makeLinkButton(text, path) {
+    const fullUrl = `${this.getSiteUrl()}${path}`;
+    if (fullUrl.startsWith('https://')) {
+      return { text, web_app: { url: fullUrl } };
+    }
+    return { text, url: fullUrl };
+  }
+
   isConfigured() {
     const token = process.env.BOT_TOKEN || this.token;
     return Boolean(token && token !== 'YOUR_BOT_TOKEN_HERE' && !token.includes('YOUR_'));
@@ -194,20 +223,79 @@ class TelegramService {
     }
 
     if (text === '🍽 Raqamli menyu') {
-      const port = process.env.PORT || 3000;
-      await this.sendMessage(chatId, `🍽 <b>Dunyo Restaurant Raqamli Menyusi:</b>\n\nTaomlar bilan tanishish va buyurtma berish uchun saytimizga kiring:\n👉 http://localhost:${port}/raqamli%20menyu/index.html`);
+      const menuText = `🍽 <b>DUNYO RESTAURANT MENYUSI</b>\n` +
+        `━━━━━━━━━━━━━━━━━━━━\n` +
+        `🍱 <b>SETLAR:</b>\n` +
+        `• Oilaviy set (4 kishilik) — 175,000 so'm\n` +
+        `• Do'stlar seti — 190,000 so'm\n` +
+        `• Juftlik seti — 105,000 so'm\n\n` +
+        `🍛 <b>OSH VA GO'SHT:</b>\n` +
+        `• To'y oshi — 45,000 so'm\n` +
+        `• Choyxona oshi — 38,000 so'm\n` +
+        `• Yumshoq go'sht — 68,000 so'm\n` +
+        `• Qozon kabob — 72,000 so'm\n\n` +
+        `🍢 <b>SHASHLIKLAR:</b>\n` +
+        `• Mol go'shti shashlik — 18,000 so'm\n` +
+        `• Jigar kabob — 15,000 so'm\n` +
+        `• Lyulya kabob — 17,000 so'm\n\n` +
+        `🍲 <b>SHO'RVA VA SALATLAR:</b>\n` +
+        `• Lag'mon — 36,000 so'm\n` +
+        `• Mastava — 28,000 so'm\n` +
+        `• Achichuk salati — 14,000 so'm\n` +
+        `• Toshkent salati — 26,000 so'm\n` +
+        `━━━━━━━━━━━━━━━━━━━━\n` +
+        `<i>Taomlarni rasmlari bilan ko'rish yoki buyurtma berish uchun pastdagi tugmalardan foydalaning:</i>`;
+
+      await this.sendMessage(chatId, menuText, {
+        reply_markup: {
+          inline_keyboard: [
+            [this.makeLinkButton('🌐 Saytda Menyuni Ochish', '/raqamli%20menyu/index.html')],
+            [this.makeLinkButton('🛵 Yetkazib berishga buyurtma', '/yetkazib%20berish/index.html')],
+            [this.makeLinkButton('📅 Stol bron qilish', '/stol%20buyurtma/index.html')],
+          ],
+        },
+      });
       return;
     }
 
     if (text === '📅 Stol bron qilish') {
-      const port = process.env.PORT || 3000;
-      await this.sendMessage(chatId, `📅 <b>Stol bron qilish:</b>\n\nO'zingizga qulay zal (1-korpus, Oilaviy zal, VIP kabinalar) va bo'sh stolni interaktiv xaritadan tanlang:\n👉 http://localhost:${port}/stol%20buyurtma/index.html`);
+      const bronText = `📅 <b>STOL BRON QILISH XIZMATI</b>\n` +
+        `━━━━━━━━━━━━━━━━━━━━\n` +
+        `Restoranimizda 4 ta shinam zal mavjud:\n` +
+        `1. <b>1-korpus (Asosiy zal):</b> Umumiy zal, oshxonaga yaqin, tez xizmat\n` +
+        `2. <b>2-korpus (Oilaviy zal):</b> Katta stollar va bolalar maydonchasi\n` +
+        `3. <b>3-korpus (VIP kabinalar):</b> Shaxsiy uchrashuvlar va tantanalar uchun\n` +
+        `4. <b>4-korpus (Yozgi bog'):</b> Ochiq osmon ostida shinam tapchanlar\n\n` +
+        `<i>Interaktiv rejamizdan bo'sh stolni tanlab, 1 daqiqada band qilishingiz mumkin:</i>`;
+
+      await this.sendMessage(chatId, bronText, {
+        reply_markup: {
+          inline_keyboard: [
+            [this.makeLinkButton('🗺 Xaritadan Stol Tanlash', '/stol%20buyurtma/index.html')],
+            [{ text: '📞 Qo\'ng\'iroq qilish', url: 'tel:+998712000000' }],
+          ],
+        },
+      });
       return;
     }
 
     if (text === '🛵 Yetkazib berish') {
-      const port = process.env.PORT || 3000;
-      await this.sendMessage(chatId, `🛵 <b>Yetkazib berish xizmati:</b>\n\nIssiq taomlar, setlar va shashliklarni to'g'ridan-to'g'ri manzilingizgacha yetkazamiz:\n👉 http://localhost:${port}/yetkazib%20berish/index.html`);
+      const devText = `🛵 <b>TEZKOR YETKAZIB BERISH</b>\n` +
+        `━━━━━━━━━━━━━━━━━━━━\n` +
+        `• <b>Yetkazish narxi:</b> 15,000 so'm\n` +
+        `• <b>150,000 so'mdan yuqori:</b> BEPUL yetkazamiz!\n` +
+        `• <b>Eng kam buyurtma:</b> 50,000 so'm\n` +
+        `• <b>Vaqti:</b> 35–50 daqiqa (issiq holda eshigingizgacha)\n\n` +
+        `<i>Manzilingizni tanlab, issiq taomlarga buyurtma berish uchun quyidagi tugmani bosing:</i>`;
+
+      await this.sendMessage(chatId, devText, {
+        reply_markup: {
+          inline_keyboard: [
+            [this.makeLinkButton('🛍 Taomlarni Tanlash va Buyurtma', '/yetkazib%20berish/index.html')],
+            [this.makeLinkButton('🍽 Menyuni ko\'rish', '/raqamli%20menyu/index.html')],
+          ],
+        },
+      });
       return;
     }
 

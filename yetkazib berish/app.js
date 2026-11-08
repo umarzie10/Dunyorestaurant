@@ -431,50 +431,50 @@
     }
 
     $('newBtn').addEventListener('click', () => {
-    if (orderPollTimer) { clearInterval(orderPollTimer); orderPollTimer = null; }
-    if (window.celebrationManager) window.celebrationManager.stopCelebration();
-    const title = document.querySelector('#dDone .done_title');
-    if (title) { title.textContent = 'Buyurtma qabul qilindi'; title.style.color = ''; }
-    $('dDone').hidden = true;
-    $('dForm').hidden = false;
-    $('comment').value = '';
-    $('formError').hidden = true;
-});
-
-/* ====== SARLAVHA ANIMATSIYASI ====== */
-const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-if (!reduceMotion) {
-    const title = document.querySelector('.d_title');
-    const text = title.textContent.trim();
-    title.setAttribute('aria-label', text);
-    title.textContent = '';
-    [...text].forEach((ch, i) => {
-        const s = document.createElement('span');
-        s.className = 'ch';
-        s.setAttribute('aria-hidden', 'true');
-        s.style.setProperty('--i', i);
-        s.textContent = ch === ' ' ? '\u00A0' : ch;
-        title.appendChild(s);
+        if (orderPollTimer) { clearInterval(orderPollTimer); orderPollTimer = null; }
+        if (window.celebrationManager) window.celebrationManager.stopCelebration();
+        const title = document.querySelector('#dDone .done_title');
+        if (title) { title.textContent = 'Buyurtma qabul qilindi'; title.style.color = ''; }
+        $('dDone').hidden = true;
+        $('dForm').hidden = false;
+        $('comment').value = '';
+        $('formError').hidden = true;
     });
 
-    const para = document.querySelector('.d_text');
-    const words = para.textContent.trim().split(/\s+/);
-    para.textContent = '';
-    words.forEach((w, i) => {
-        const wrap = document.createElement('span');
-        wrap.className = 'w';
-        const inner = document.createElement('span');
-        inner.textContent = w;
-        inner.style.setProperty('--d', 600 + Math.min(i * 35, 1000) + 'ms');
-        wrap.appendChild(inner);
-        para.appendChild(wrap);
-        if (i < words.length - 1) para.appendChild(document.createTextNode(' '));
-    });
-    requestAnimationFrame(() => para.classList.add('is-visible'));
-}
+    /* ====== SARLAVHA ANIMATSIYASI ====== */
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduceMotion) {
+        const title = document.querySelector('.d_title');
+        const text = title.textContent.trim();
+        title.setAttribute('aria-label', text);
+        title.textContent = '';
+        [...text].forEach((ch, i) => {
+            const s = document.createElement('span');
+            s.className = 'ch';
+            s.setAttribute('aria-hidden', 'true');
+            s.style.setProperty('--i', i);
+            s.textContent = ch === ' ' ? '\u00A0' : ch;
+            title.appendChild(s);
+        });
 
-/* ====== BOSHLASH ====== */
-renderCats();
-renderDishes();
-updatePanel();
-}) ();
+        const para = document.querySelector('.d_text');
+        const words = para.textContent.trim().split(/\s+/);
+        para.textContent = '';
+        words.forEach((w, i) => {
+            const wrap = document.createElement('span');
+            wrap.className = 'w';
+            const inner = document.createElement('span');
+            inner.textContent = w;
+            inner.style.setProperty('--d', 600 + Math.min(i * 35, 1000) + 'ms');
+            wrap.appendChild(inner);
+            para.appendChild(wrap);
+            if (i < words.length - 1) para.appendChild(document.createTextNode(' '));
+        });
+        requestAnimationFrame(() => para.classList.add('is-visible'));
+    }
+
+    /* ====== BOSHLASH ====== */
+    renderCats();
+    renderDishes();
+    updatePanel();
+})();
